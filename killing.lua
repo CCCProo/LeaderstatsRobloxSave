@@ -40,28 +40,22 @@ game.Players.PlayerAdded:Connect(function(p)
 		end
 	end
 	
-	p.CharacterAdded:Connect(function(ch)
-		local hum = ch:WaitForChild("Humanoid")
-		hum.Died:Connect(function()
-
-			local DamageDealer = hum:FindFirstChild("creator")
-			if DamageDealer and DamageDealer.Value then
-				local killer_user = game.Players:FindFirstChild(DamageDealer.Value.Name)
-
-				if killer_user then
-					if p:FindFirstChild(name_folder) then
-						if p[name_folder]:FindFirstChild("Kills") then
-							
-							p[name_folder]["Kills"] += 1 --прибавление значения к Kills
-							
+	p.CharacterAdded:connect(function(Character)
+		local Humanoid = Character:FindFirstChild "Humanoid"
+		if Humanoid then
+			Humanoid.Died:connect(function()
+				for i, Child in pairs(Humanoid:GetChildren()) do
+					if Child:IsA('ObjectValue') and Child.Value and Child.Value:IsA('Player') then
+						local Killer = Child.Value
+						if Killer:FindFirstChild(name_folder) then
+							Killer[name_folder].Kills += 1
 						end
+						return
 					end
 				end
-			end
-
-		end)
+			end)
+		end
 	end)
-	
 end)
 
 
