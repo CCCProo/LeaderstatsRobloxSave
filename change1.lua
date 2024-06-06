@@ -1,6 +1,6 @@
 local rs = game:GetService("ReplicatedStorage")
 
-user_admin = 3134114276
+local user_admin = 3134114276
 
 local dss = game:GetService("DataStoreService")
 local name_data_store = "LeaderstatsSave"
