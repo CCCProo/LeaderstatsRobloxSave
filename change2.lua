@@ -9,6 +9,7 @@ script.Parent.MouseButton1Up:Connect(function()
 	if not gui.Summa.Text then return end
 	
 	local nickname = gui.Nickname.Text
+	print(nickname)
 	local get_id = pr:GetUserIdFromNameAsync(nickname)
 	
 	local change_value = tonumber(gui.Summa.Text)
