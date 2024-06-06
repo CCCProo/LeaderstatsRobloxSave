@@ -1,13 +1,14 @@
 local commands_dance = {
-	["gg"] = 12754418988
+	["gg ggds"] = 12754418988
 }
+local sound_id = 624513719
 
 local plr = game:GetService("Players")
 plr.PlayerAdded:Connect(function(player)
 	player.Chatted:Connect(function(msg)
 		
-		if commands_dance[msg] then
-			local dance_id = commands_dance[msg]
+		if commands_dance[string.lower(msg)] then
+			local dance_id = commands_dance[string.lower(msg)]
 			
 			local character = player.Character or player.CharacterAdded:Wait()
 
@@ -21,6 +22,14 @@ plr.PlayerAdded:Connect(function(player)
 			animation_play:Play()
 		end
 		
+		local text = tostring(msg)
+		
+		if string.find(string.lower(text), string.lower("Help")) then
+			local sound = Instance.new("Sound", game.Workspace)
+			sound.SoundId = "rbxassetid://"..sound_id
+			
+			sound:Play()
+		end
+		
 	end)
 end)
-
