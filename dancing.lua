@@ -1,7 +1,13 @@
 local commands_dance = {
 	["gg ggds"] = 12754418988
 }
-local sound_id = 624513719
+
+local sound_teamp = {
+	["Abiba"] = 624513719
+}
+
+
+local teams = game:GetService("Teams")
 
 local plr = game:GetService("Players")
 plr.PlayerAdded:Connect(function(player)
@@ -25,8 +31,21 @@ plr.PlayerAdded:Connect(function(player)
 		local text = tostring(msg)
 		
 		if string.find(string.lower(text), string.lower("Help")) then
-			local sound = Instance.new("Sound", game.Workspace)
-			sound.SoundId = "rbxassetid://"..sound_id
+			
+			local sound
+			
+			if not sound_teamp[player.Team] then return end
+			
+			local sound_id = sound_teamp[player.Team]
+			
+			if player.Team == teams['Whos'] then
+				
+				sound = Instance.new("Sound", game.Workspace)
+				sound.SoundId = "rbxassetid://"..sound_id
+			elseif player.Team == teams['What'] then
+				sound = Instance.new("Sound", game.Workspace)
+				sound.SoundId = "rbxassetid://"..sound_id
+			end
 			
 			sound:Play()
 		end
